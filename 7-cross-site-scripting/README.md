@@ -5,7 +5,7 @@ Pour cette preuve de concept, deux utilisateurs seront mobilisés :
 - **john_doe**, dont le mot de passe est **CroSS-SitE\$John2020**
 - **super_jane**, dont le mot de passe est **CroSS-SitE\$Jane2020**
 
-Le but va être de se connecter avec le compte de **super_jane**, sans connaître son mot de passe.
+Le but va être de se connecter avec le compte de **super_jane**, sans utiliser directement son mot de passe. On admettra que John est l'attaquant, et que Jane est la victime.
 
 Prérequis :
 
@@ -28,4 +28,4 @@ Mode d'emploi
 11. En PHP, chaque session est identifiée de manière unique par un cookie de session (**PHPSESSID**). Cette information est personnelle et ne doit en aucun cas être communiquée à une tierce personne. Cet identifiant permettrait à un attaquant de "voler" votre identité, en se faisant passer pour quelqu'un d'autre au niveau du serveur. Jetez un oeil au script `malveillant/index.php`. Que fait ce code ?
 12. Préparez un message permettant d'exécuter une requête Ajax GET avec JQuery (`$.get(uri)`) vers notre script malveillant (dont l'uri est `malveillant/index.php`) ayant un paramètre GET appelé cookie. Ce paramètre aura pour valeur les cookies de la page sous la forme d'une chaîne de caractères (en utilisant l'instruction trouvée à la question 10). Envoyez le message. Que se passera-t'il quand un utilisateur rechargera la page ?
 13. Vous venez comprendre comment des instructions confidentielles peuvent être envoyées vers un serveur malveillant à l'aide d'attaques XSS. Dans cet exemple le script malveillant est sur le même serveur que l'application de forum. Dans la vrai vie le script malveillant peut être créé par n'importe qui et être hébergé sur n'importe quel serveur.
-14. Sur un autre navigateur, connectez-vous avec le compte de **super_jane**. Vérifiez que le fichier `malveillant/cookies.txt` contient les informations des cookies de john_doe, mais aussi ceux de super_jane. En utilisant les informations de ce fichier, modifiez le cookie de session de john_doe en le remplaçant par celui de super_jane. Rechargez la page. Bravo, vous venez d'usurper l'identité de super_jane !
+14. Sur un autre navigateur, mettez-vous dans la peau de Jane en vous connectant avec le compte de **super_jane**. Vérifiez que le fichier `malveillant/cookies.txt` contient les informations des cookies de john_doe, mais aussi ceux de super_jane. En utilisant les informations de ce fichier, modifiez le cookie de session de john_doe en le remplaçant par celui de super_jane. Rechargez la page. Bravo, vous venez d'usurper l'identité de super_jane !
