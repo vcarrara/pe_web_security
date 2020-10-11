@@ -1,9 +1,9 @@
-# To be completed.
+# Cross-Site Scripting (XSS).
 
 Pour cette preuve de concept, deux utilisateurs seront mobilisés :
 
 - **john_doe**, dont le mot de passe est **CroSS-SitE\$John2020**
-- **super_jane**, dont nous ne connaissons pas le mot de passe
+- **super_jane**, dont le mot de passe est **CroSS-SitE\$Jane2020**
 
 Le but va être de se connecter avec le compte de **super_jane**, sans connaître son mot de passe.
 
