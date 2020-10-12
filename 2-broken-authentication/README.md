@@ -2,6 +2,8 @@
 
 ## Credential stuffing avec Selenium (**Node.js**).
 
+[Comment prévenir le credential stuffing](https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html)
+
 Le credential stuffing est un type de cyberattaque où des informations de comptes volées consistant généralement en des listes d'identifiants et les mots de passe associés (souvent obtenus de manière frauduleuse) sont utilisés pour obtenir un accès non autorisé à des comptes utilisateurs par le biais de demandes de connexion automatisée à grande échelle adressées à des applications Web1.
 
 Contrairement au cassage de mot de passe, une attaque de credential stuffing ne tente pas de trouver un mot de passe par une attaque par force brute. L'attaquant automatise plutôt des tentatives de connexions en utilisant de milliers ou même de millions de paires d'identifiants / mots de passe précédemment découverts.
