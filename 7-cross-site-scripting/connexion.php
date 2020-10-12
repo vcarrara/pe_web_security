@@ -9,7 +9,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         session_start();
         $_SESSION['username'] = $username;
         // Redirection à la page d'accueil
-        header('Location: /7-cross-site-scripting/index.php');
+        header('Location: index.php');
     } else {
         $error = 'Mauvais identifiant ou mot de passe';
     }

@@ -7,6 +7,7 @@ session_start();
 if (isset($_POST['message']) && isset($_SESSION['username'])) {
     include_once './models/Messages.php';
     Messages::add($_SESSION['username'], $_POST['message']);
+    // On effectue une requête GET sur la page courante pour flush les données POST et que le formulaire ne soit pas renvoyé en cas de refresh
     header("Location: " . $_SERVER['PHP_SELF']);
 }
 
@@ -17,7 +18,7 @@ if (isset($_SESSION['username'])) {
 
     // Affichage du bouton de deconnexion et du message de bienvenue
     echo '<div class="container d-flex flex-column p-3">
-                <form method="POST" action="/7-cross-site-scripting/deconnexion.php">
+                <form method="POST" action="deconnexion.php">
                     <button type="submit" class="btn btn-danger">Déconnexion</button>
                 </form>
                 <h1 class="mb-5">Bienvenue ' . $user . ' !</h1>';
@@ -40,7 +41,7 @@ if (isset($_SESSION['username'])) {
             </form>
         </div>';
 } else {
-    header('Location: /7-cross-site-scripting/connexion.php');
+    header('Location: connexion.php');
 }
 
 require './views/footer.php';

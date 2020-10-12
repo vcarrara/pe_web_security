@@ -1,8 +1,9 @@
 <?php
+require_once './models/Database.php';
 
 class Messages {
     public static function get() {
-        $pdo = new PDO('mysql:host=localhost;dbname=security', 'root', '');
+        $pdo = Database::pdo();
 
         $req = $pdo->prepare('SELECT * FROM MESSAGES');
         $req->execute();
@@ -12,7 +13,7 @@ class Messages {
     }
 
     public static function add(String $sender, String $message) {
-        $pdo = new PDO('mysql:host=localhost;dbname=security', 'root', '');
+        $pdo = Database::pdo();
 
         $req = $pdo->prepare('INSERT INTO MESSAGES (mess, sender) VALUES (:mess, :sender)');
         $req->execute(array('mess' => $message, 'sender' => $sender));
