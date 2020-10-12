@@ -9,9 +9,9 @@ Le but va être de se connecter avec le compte de **super_jane**, sans utiliser 
 
 Prérequis :
 
-0. Modifier le fichier `models/Database.php` afin de vérifier que les connexions vers la base de données sont correctes.
-1. Créer les tables de la base de données, grâce au fichier `/sql/create.sql`.
-2. Insérer les données en base, grâce au fichier `/sql/insert.sql`.
+0. Modifier le fichier `models/Database.php` afin de vérifier que les informations de connexion vers la base de données sont correctes.
+1. Créer les tables de la base de données, grâce au fichier `sql/create.sql`.
+2. Insérer les données, grâce au fichier `sql/insert.sql`.
 
 :bookmark_tabs: Mode d'emploi
 
