@@ -7,9 +7,9 @@ Pour cette preuve de concept, deux utilisateurs seront mobilisés :
 
 Le but va être de se connecter avec le compte de **super_jane**, sans utiliser directement son mot de passe. On admettra que John est l'attaquant, et que Jane est la victime.
 
-Prérequis :
+:loudspeaker: Prérequis :
 
-0. Modifier le fichier `models/Database.php` afin de vérifier que les informations de connexion vers la base de données sont correctes.
+0. Vérifier que les informations de connexion vers la base de données sont correctes dans le fichier `models/Database.php`.
 1. Créer les tables de la base de données, grâce au fichier `sql/create.sql`.
 2. Insérer les données, grâce au fichier `sql/insert.sql`.
 
