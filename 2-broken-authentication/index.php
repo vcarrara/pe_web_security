@@ -6,7 +6,7 @@ if (!isset($_SESSION['username'])) {
     header('Location: connexion.php');
 }
 
-include_once './views/header.php';
+include_once './fragments/header.php';
 ?>
 
 <div class="container mt-5">
@@ -21,4 +21,4 @@ include_once './views/header.php';
 </div>
 
 <?php
-include_once './views/footer.php';
+include_once './fragments/footer.php';

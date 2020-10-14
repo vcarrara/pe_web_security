@@ -15,7 +15,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     }
 }
 
-include_once './views/header.php';
+include_once './fragments/header.php';
 ?>
 <div class="container mt-5">
     <?php
@@ -32,4 +32,4 @@ include_once './views/header.php';
 
 
 <?php
-include_once './views/footer.php';
+include_once './fragments/footer.php';
