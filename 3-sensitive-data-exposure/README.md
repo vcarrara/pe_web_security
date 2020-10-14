@@ -1,5 +1,10 @@
 # To be completed.
 
+:loudspeaker: Prérequis :
+
+0. Vérifier que les informations de connexion vers la base de données sont correctes dans le fichier `models/Database.php`.
+1. Créer les tables de la base de données, grâce au fichier `sql/create.sql`.
+
 :bookmark_tabs: Mode d'emploi :
 
 1. Rendez-vous sur la page `no-hash/index.php`. Il s'agit d'un formulaire d'inscription permettant de créer un nouvel utilisateur pour l'application et de l'ajouter dans la base de données. Créez l'utilisateur **john_doe_no_hash** ayant pour mot de passe **CroSS-SitE\$NoHash2020**.
