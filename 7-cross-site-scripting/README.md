@@ -13,7 +13,7 @@ Le but va être de se connecter avec le compte de **super_jane**, sans utiliser 
 1. Créer les tables de la base de données, grâce au fichier `sql/create.sql`.
 2. Insérer les données, grâce au fichier `sql/insert.sql`.
 
-:bookmark_tabs: Mode d'emploi
+:bookmark_tabs: Mode d'emploi :
 
 1. Connectez-vous avec le compte de **john_doe**.
 2. Postez le message 'Hello World!' sur le forum. Le message devrait s'afficher sous les autres.

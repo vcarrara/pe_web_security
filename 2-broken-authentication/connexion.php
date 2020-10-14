@@ -23,7 +23,6 @@ include_once './views/header.php';
         echo '<div class="alert alert-danger">' . $error . '</div>';
     }
     ?>
-
     <form method="POST" action="">
         <input type="text" placeholder="username" class="form-control mb-2" name="username" />
         <input type="password" placeholder="password" class="form-control mb-2" name="password" />
