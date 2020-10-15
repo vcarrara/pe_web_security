@@ -1,5 +1,5 @@
 <?php
-require './views/header.php';
+require './fragments/header.php';
 
 session_start();
 
@@ -17,5 +17,5 @@ if (isset($_SESSION['username'])) {
     header('Location: connexion.php');
 }
 
-require './views/footer.php';
+require './fragments/footer.php';
 ?>

@@ -15,7 +15,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     }
 }
 
-require './views/header.php';
+require './fragments/header.php';
 ?>
 
 <div class="container mt-5">
@@ -33,4 +33,4 @@ require './views/header.php';
 </div>
 
 <?php
-require './views/footer.php';
+require './fragments/footer.php';
