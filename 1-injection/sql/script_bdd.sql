@@ -6,5 +6,5 @@ CREATE TABLE USERS (
 );
 
 INSERT INTO USERS VALUES 
-    ('john_doe', '$2y$10$ZLO3lBfEFPmoTcUfXfP8iensaoMFcF13p2fMmYHIJFJzEDnsLVW9u'), 
-    ('super_jane', '$2y$10$h6oYjRxxaoUSzBxUmU3CU.IeCqhCV6Rr4gZZ.mqbeD6XOksLJMu9e');
+    ('john_doe', 'CroSS-SitE$John2020'), 
+    ('super_jane', 'CroSS-SitE$Jane2020');
