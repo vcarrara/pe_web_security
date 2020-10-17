@@ -14,9 +14,11 @@ Pour pouvoir atteindre son objectif, john va utiliser l'**injection SQL** car il
 
 1. Connectez-vous au compte de **john_doe** pour vérifier que tout fonctionne bien.
 2. Déconnectez-vous et essayer de vous connecter au compte administrateur de super_jane. Bien sûr sans son mot de passe il est impossible de s'y connecter.
-3. Sachant que l'instruction SQL qui permet l'authentification est du format ci-dessous, essayez de trouver une injection SQL à saisir dans le champs de l'identifiant permettant de rendre le mot de passe facultatif. *Indice -> utilisez le caractère '#'*.
+3. Sachant que l'instruction SQL qui permet l'authentification est du format ci-dessous, essayez d'effectuer une injection SQL. Essayez de trouver une instruction à saisir dans le champ de l'identifiant permettant de rendre le mot de passe facultatif. *Indice -> utilisez les caractère '#' ou '--' permettant d'écrire un commentaire en SQL*.
 
 ```sql
+# Ceci est un commentaire
+-- Ceci est un autre commentaire
 SELECT username FROM Users WHERE username = 'username' AND pass = 'password';
 ```
 
