@@ -71,7 +71,8 @@ echo '<xmp>' . file_get_contents('<nom_du_fichier>') . '</xmp>';
 
 11. :warning: (peut être risqué) Tuez le processus Apache. La fonction [shell_exec](https://www.php.net/manual/fr/function.shell-exec.php) permet d'exécuter une commande via le Shell et retourne le résultat sous forme de chaîne de caractères.
 
-- Avec Windows et Xampp
+- Avec Windows et Xampp :
+
   Grâce à la fonction présentée ci-dessus et au formulaire de la calculatrice, listez les processus qui écoutent le port 80 sur le serveur grâce à la commande `netstat -ano | findstr :<numéro_de_port>`. Vous devriez trouver l'identifiant (**PID**) du processus ayant l'état **LISTENING** sur le port 80. Maintenant, vous devriez pouvoir tuer le processus (httpd.exe) qui correspond au serveur Apache / PHP et ainsi rendre le site **totalement inutilisable** grâce à la commande `taskkill /PID <identifiant_de_processus>`.
 
 :tada: Félicitations, vous venez d'effectuer une attaque DDoS sur le serveur.
