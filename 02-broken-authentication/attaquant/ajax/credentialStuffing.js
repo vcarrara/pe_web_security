@@ -29,7 +29,7 @@ if (program.username) {
             // Le type de contenu (pour les forumaires PHP) est application/x-www-form-urlencoded
             axios({
                 method: 'POST',
-                url: 'http://localhost:80/2-broken-authentication/connexion.php',
+                url: 'http://localhost:80/02-broken-authentication/connexion.php',
                 data: `username=${username}&password=${password}`,
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
