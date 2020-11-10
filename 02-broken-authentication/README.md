@@ -12,7 +12,7 @@ Voici les [mots de passe les moins sécurisés](https://github.com/danielmiessle
 
 Il est possible d'envoyer un certain nombre de requêtes HTTP vers notre script de connexion, en essayant un large nombre de mot de passe parmis les plus utilisés. On envoie ainsi plusieurs centaines de requêtes **POST** vers notre script avec pour chaque appel un mot de passe fréquemment utilisé différent. Si la connexion échoue, rien ne se passe, mais si la connexion réussit, une redirection est envoyée vers la page `index.php`, ce qui se traduit par un code HTTP 302. Ce code de réponse 302, lorsqu'il est interpellé par le navigateur, se traduit par une requête GET automatique vers la redirection, c'est ce qu'il a fallu simuler dans le script.
 
-:danger: Le traitement peut être long.
+:warning: Le traitement peut être long.
 
 :bookmark_tabs: Mode d'emploi :
 
