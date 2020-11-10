@@ -30,7 +30,7 @@ if (program.username) {
 
             for await (const password of rl) {
                 // On se rend à l'URI correspondant à l'application
-                await driver.get('http://localhost/2-broken-authentication')
+                await driver.get('http://localhost/02-broken-authentication')
 
                 // Entre la chaine de caractères username dans l'input ayant pour nom 'username'
                 await driver.findElement(By.name('username')).sendKeys(username)
