@@ -31,19 +31,12 @@ _Il est vivement recommandé d'effectuer des sauvegardes de ces fichiers avant d
 
 2. Rendez-vous à l'URI `/06-security-misconfiguration/hide-php/hello_world.php`. Grâce à votre navigateur, examinez les entêtes (headers) qui sont renvoyés par le serveur avec le fichier **hello_world.php**.
 
-   - Avec Chrome :
-     - Clic droit - Inspecter ou <kbd>F12</kbd>
+   Avec Chrome ou Firefox :
+     - <kbd>F12</kbd>
      - Network
-     - All
      - Raffraichissez la page ou <kbd>Ctrl</kbd>+<kbd>R</kbd>
      - Sélectionnez le fichier hello_world.php
-     - **Response Headers**
-   - Avec Firefox :
-     - Clic droit - Examiner l'élément ou <kbd>F12</kbd>
-     - Réseau
-     - Raffraichissez la page ou <kbd>Ctrl</kbd>+<kbd>R</kbd>
-     - Sélectionnez le fichier hello_world.php
-     - **En-têtes de la réponse**
+     - **Response Headers**   
 
    Vous devriez voir plusieurs entêtes de réponse HTTP dont deux particulières :
 
