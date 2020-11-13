@@ -14,16 +14,16 @@ _Il est vivement recommandé d'effectuer des sauvegardes de ces fichiers avant d
 
 1.  Rendez-vous à l'URI `/06-security-misconfiguration/directory-listing`. Quelles informations y trouvez vous ? La fonctionnalité que vous venez de découvrir, qui est très souvent activée par défaut, est appelée le **Directory Listing** (ou parfois **Directory Browsing**) et donne la possibilité aux utilisateurs d'une application web d'afficher le contenu d'un répertoire présent sur le serveur. Même si cette fonctionnalité peut être utile dans certains cas précis (par exemple lister un ensemble de fichiers téléchargeables pour l'utilisateur), elle constitue un problème de sécurité dans la plupart des cas. En effet, il n'est par exemple pas souhaitable de lister les fichiers de configuration présents sur le serveur.
 
-2. Dans le dossier `06-security-misconfiguration/directory-listing`, ouvrez le fichier appelé `.htaccess`. Les fichiers `.htaccess` fournissent une méthode pour modifier la configuration du serveur au niveau de chaque répertoire.
+2.  Dans le dossier `06-security-misconfiguration/directory-listing`, ouvrez le fichier appelé `.htaccess`. Les fichiers `.htaccess` fournissent une méthode pour modifier la configuration du serveur au niveau de chaque répertoire.
 
-3. Dans ce fichier, ajoutez une ligne :
+3.  Dans ce fichier, ajoutez une ligne :
 
-   ```
-   # Désactivation du directory listing
-   Options -Indexes
-   ```
+    ```
+    # Désactivation du directory listing
+    Options -Indexes
+    ```
 
-4. Retournez sur la page `/06-security-misconfiguration/directory-listing`. Les fichiers sont-ils listés ? Si la réponse est non, bravo :tada: ! Vous venez de désactiver le **Directory Listing** dans ce répertoire. Sinon, recommencez l'étape 2 et 3.
+4.  Retournez sur la page `/06-security-misconfiguration/directory-listing`. Les fichiers sont-ils listés ? Si la réponse est non, bravo :tada: ! Vous venez de désactiver le **Directory Listing** dans ce répertoire. Sinon, recommencez l'étape 2 et 3.
 
 ## Masquage de l'utilisation de PHP
 
@@ -32,11 +32,12 @@ _Il est vivement recommandé d'effectuer des sauvegardes de ces fichiers avant d
 2. Rendez-vous à l'URI `/06-security-misconfiguration/hide-php/hello_world.php`. Grâce à votre navigateur, examinez les entêtes (headers) qui sont renvoyés par le serveur avec le fichier **hello_world.php**.
 
    Avec Chrome ou Firefox :
-     - <kbd>F12</kbd>
-     - Network
-     - Raffraichissez la page ou <kbd>Ctrl</kbd>+<kbd>R</kbd>
-     - Sélectionnez le fichier hello_world.php
-     - **Response Headers**   
+
+   - <kbd>F12</kbd>
+   - Network
+   - Raffraichissez la page ou <kbd>Ctrl</kbd>+<kbd>R</kbd>
+   - Sélectionnez le fichier hello_world.php
+   - **Response Headers**
 
    Vous devriez voir plusieurs entêtes de réponse HTTP dont deux particulières :
 
@@ -100,7 +101,7 @@ _Il est vivement recommandé d'effectuer des sauvegardes de ces fichiers avant d
 
 ## Masquage des erreurs PHP
 
-1. Les messages d'erreurs PHP peuvent montrer peuvent contenir des informations sur la structure interne de l'application Web, il est vivement recommandé de ne jamais les afficher sur le serveur en production. Rendez vous sur la page `/06-security-misconfiguration/hide-errors/error_script.php`.
+1. Les messages d'erreurs PHP peuvent montrer peuvent contenir des informations sur la structure interne de l'application web, il est vivement recommandé de ne jamais les afficher sur le serveur en production. Rendez vous sur la page `/06-security-misconfiguration/hide-errors/error_script.php`.
 
 2. Dans le dossier `hide-errors`, ouvrez le fichier `.htaccess` et ajoutez la ligne suivante :
 
@@ -113,3 +114,41 @@ _Il est vivement recommandé d'effectuer des sauvegardes de ces fichiers avant d
 3. Retournez sur la page `/06-security-misconfiguration/hide-errors/error_script.php` et vérifiez que l'erreur n'est plus affichée. :tada: Bravo ! Vous avez réussi à masquer les erreurs de PHP.
 
 4. Nous n'avons masqué que les erreurs de PHP, nous avons toujours laissé les erreurs HTML, les erreurs de démarrage, les erreurs de log, il est bien-entendu possible de les masquer également.
+
+## Protection DoS/DDoS
+
+Une attaque par déni de service est une attaque ayant pour but de rendre indisponible un service et d'empêcher les utilisateurs d'un service de l'utiliser. Il est possible de se protéger de ces attaques en utilisant le module **mod_evasive**. Ce module permet de répondre au traffic de l'application web en proposant plusieurs options de configuration, on peut par exemple définir le nombre maximum de fois où une page est appelée par secondes et définir un laps de temps où l'adresse IP de l'utilisateur sera bloquée. Cette méthode permet notamment des attaques de **Brute Force** ou de [**Credential Stuffing**](https://github.com/vcarrara/pe_web_security/tree/main/02-broken-authentication). Il est recommandé de consulter [cette ressource](https://github.com/jzdziarski/mod_evasive) afin d'en savoir plus sur les options de configuration disponibles.
+
+1. Téléchargez et installez le module **mod_evasive**.
+
+   Sur Windows :
+
+   - [Téléchargez le module mod_evasive](https://www.apachelounge.com/download/)
+   - Ouvrez l'archive et déposez `mod_evasive.so` dans le dossier `modules` d'Apache
+   - Dans le fichier `httpd.conf` ajoutez les instructions suivantes :
+
+     ```
+     # Chargement du module
+     LoadModule evasive_module modules/mod_evasive.so
+
+     # Configuration du module
+     DOSEnabled true
+     # Seuil de requête pour la même page (ou URI) par interval de page
+     # Une fois que le seuil a été atteind, l'adresse IP du client est ajouté à la blacklist
+     DOSPageCount 2
+     DOSPageInterval 1
+     # Seuil du nombre total de requête pour n'importe quel object d'un même client (images, css, ...)
+     # Une fois que le seuil a été atteind, l'adresse IP du client est ajouté à la blacklist
+     DOSSiteCount 100
+     DOSSiteInterval 1     
+     # Période durant laquelle on bloque le client
+     DOSBlockingPeriod 10
+     ```
+
+   Sur Linux :
+
+   - [Consultez cette ressource](https://www.nomachine.com/AR02R01077)
+
+2. Redémarrez Apache
+
+3. Raffraichissez la page plusieurs fois d'affilée, que se passe t'il ? Si vous recevez une erreur 403 : **Forbidden**, :tada: Bravo ! Vous venez d'empêcher le rechargement massif de votre application web !
