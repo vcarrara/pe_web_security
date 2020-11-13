@@ -4,7 +4,7 @@
 
 ## Désactivation du Directory Listing/Browsing
 
-1.  Rendez-vous à l'URI `/06-security-misconfiguration/directory-listing`. Quelles informations y trouvez vous ? La fonctionnalité que vous venez de découvrir, qui est très souvent activée par défaut, est appelée le **Direcory Listing** (ou parfois **Directory Browsing**) et donne la possibilité aux utilisateurs d'une application web d'afficher le contenu d'un répertoire présent sur le serveur. Même si cette fonctionnalité peut être utile dans certains cas précis (par exemple lister un ensemble de fichiers téléchargeables pour l'utilisateur), elle constitue un problème de sécurité dans la plupart des cas. En effet, il n'est par exemple pas souhaitable de lister les fichiers de configuration présents sur le serveur.
+1.  Rendez-vous à l'URI `/06-security-misconfiguration/directory-listing`. Quelles informations y trouvez vous ? La fonctionnalité que vous venez de découvrir, qui est très souvent activée par défaut, est appelée le **Directory Listing** (ou parfois **Directory Browsing**) et donne la possibilité aux utilisateurs d'une application web d'afficher le contenu d'un répertoire présent sur le serveur. Même si cette fonctionnalité peut être utile dans certains cas précis (par exemple lister un ensemble de fichiers téléchargeables pour l'utilisateur), elle constitue un problème de sécurité dans la plupart des cas. En effet, il n'est par exemple pas souhaitable de lister les fichiers de configuration présents sur le serveur.
 
 2.  Dans le dossier `06-security-misconfiguration/directory-listing`, ouvrez le fichier appelé `.htaccess`. Les fichiers `.htaccess` fournissent une méthode pour modifier la configuration du serveur au niveau de chaque répertoire.
 
