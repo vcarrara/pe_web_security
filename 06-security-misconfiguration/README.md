@@ -140,7 +140,7 @@ Une attaque par déni de service est une attaque ayant pour but de rendre indisp
      # Seuil du nombre total de requête pour n'importe quel object d'un même client (images, css, ...)
      # Une fois que le seuil a été atteind, l'adresse IP du client est ajouté à la blacklist
      DOSSiteCount 100
-     DOSSiteInterval 1     
+     DOSSiteInterval 1
      # Période durant laquelle on bloque le client
      DOSBlockingPeriod 10
      ```
@@ -151,4 +151,43 @@ Une attaque par déni de service est une attaque ayant pour but de rendre indisp
 
 2. Redémarrez Apache
 
-3. Raffraichissez la page plusieurs fois d'affilée, que se passe t'il ? Si vous recevez une erreur 403 : **Forbidden**, :tada: Bravo ! Vous venez d'empêcher le rechargement massif de votre application web !
+3. Raffraichissez une page plusieurs fois d'affilée, que se passe t'il ? Si vous recevez une erreur 403 : **Forbidden**, :tada: Bravo ! Vous venez d'empêcher le rechargement massif de votre application web !
+
+## Utilisation d'un pare-feu applicatif (**WAF**)
+
+1. Téléchargez et installez le module **mod_security**.
+
+   Sur Windows :
+
+   1. [Téléchargez le module mod_security](https://www.apachelounge.com/download/)
+   2. Ouvrez l'archive et déposez `mod_security2.so` dans le dossier `modules` d'Apache
+   3. Déposez le fichier `yajl.dll` dans le dossier `bin` d'Apache
+   4. [Téléchargez les core rules set proposées par OWASP](https://github.com/coreruleset/coreruleset)
+   5. Dans le dossier `conf` d'Apache, créez un dossier `crs`
+   6. A l'intérieur du dossier `conf`, déposez l'intégralité du contenu téléchargé à l'étape 4
+   7. Renommez le fichier `crs-setup.conf.example` par `crs-setup.conf`
+
+2. Dans le fichier `httpd.conf` décommentez la ligne suivante :
+
+   ```
+   # LoadModule unique_id_module modules/mod_unique_id.so
+   ```
+
+3. Ajoutez les lignes suivantes et vérifiez la conformité des chemins :
+
+   ```
+   # Chargement du module
+   LoadModule security2_module modules/mod_security2.so
+
+   # Configuration du module
+   SecRuleEngine On
+   # La ligne suivante permet de vérifier le fonctionnement du pare feu
+   # L'ajout d'un paramètre testparam avec comme valeur test dans l'URI devrait renvoyer une erreur 403
+   SecRule ARGS:testparam "@contains test" "id:1234,deny,status:403,msg:'Our test rule has triggered'"
+
+   # Inclusion des core rules d'OWASP
+   Include conf/crs/crs-setup.conf
+   Include conf/crs/rules/*.conf
+   ```
+
+4. Testez le bon fonctionnement du WAF.
