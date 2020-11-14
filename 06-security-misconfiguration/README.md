@@ -163,13 +163,14 @@ Un Web Application Firewall (**WAF**) est un type de pare-feu qui protège un se
 
    Sur Windows :
 
-   1. [Téléchargez le module mod_security](https://www.apachelounge.com/download/)
-   2. Ouvrez l'archive et déposez `mod_security2.so` dans le dossier `modules` d'Apache
-   3. Déposez le fichier `yajl.dll` dans le dossier `bin` d'Apache
-   4. [Téléchargez les core rules set proposées par OWASP](https://github.com/coreruleset/coreruleset)
-   5. Dans le dossier `conf` d'Apache, créez un dossier `crs`
-   6. A l'intérieur du dossier `conf`, déposez l'intégralité du contenu téléchargé à l'étape 4
-   7. Renommez le fichier `crs-setup.conf.example` par `crs-setup.conf`
+   - [Téléchargez le module mod_security](https://www.apachelounge.com/download/)
+   - Ouvrez l'archive et déposez `mod_security2.so` dans le dossier `modules` d'Apache
+   - Déposez le fichier `yajl.dll` dans le dossier `bin` d'Apache
+
+   - Dans le dossier `conf` d'Apache, créez un dossier `crs`
+   - [Téléchargez les core rules set proposées par OWASP](https://github.com/coreruleset/coreruleset)
+   - Déposez l'intégralité du contenu téléchargé à l'intérieur du dossier `conf`
+   - Renommez le fichier `crs-setup.conf.example` par `crs-setup.conf`
 
 2. Dans le fichier `httpd.conf` décommentez la ligne suivante :
 
