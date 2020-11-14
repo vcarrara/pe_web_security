@@ -155,6 +155,10 @@ Une attaque par déni de service est une attaque ayant pour but de rendre indisp
 
 ## Utilisation d'un pare-feu applicatif (**WAF**)
 
+Un Web Application Firewall (**WAF**) est un type de pare-feu qui protège un serveur HTTP contre diverses attaques. Le firewall examine les paquets HTTP/HTTPS tentant d'accéder au serveur et peut refuser l'accès à une ressource s'il détermine qu'il sagit une requête malveillante ([Injection](https://github.com/vcarrara/pe_web_security/tree/main/01-injection), [XSS](https://github.com/vcarrara/pe_web_security/tree/main/07-cross-site-scripting), ...). :warning: Configurer un WAF est une tâche complexe, de par la complexité et la gestion de faux-positifs qui peuvent être déclarés.
+
+**mod_security** est un WAF présenté sous la forme d'un module **Apache** qui analyse les requête reçues grâce à un ensemble de règles définies dans des fichiers de configuration. Le **OWASP mod_security Core Rule Set (CRS)** est un ensemble générique de règles de détection d'attaques définies pour mod_security et édité par l'organisme **OWASP**. Le but du CRS est de protéger les applications web d'un large panel d'attaques, incluant le [OWASP top 10](https://owasp.org/www-project-top-ten/) avec un minimum de faux-positifs. Le CRS met à disposition une protection contre plusieurs des attaques les plus communes comme les injections SQL ou XSS.
+
 1. Téléchargez et installez le module **mod_security**.
 
    Sur Windows :
@@ -190,4 +194,4 @@ Une attaque par déni de service est une attaque ayant pour but de rendre indisp
    Include conf/crs/rules/*.conf
    ```
 
-4. Testez le bon fonctionnement du WAF.
+4. Testez le bon fonctionnement du WAF. :tada: Bravo ! Vous avez mis en place un firewall applicatif.
