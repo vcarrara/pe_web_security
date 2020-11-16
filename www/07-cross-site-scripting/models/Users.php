@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config/Database.php';
 
 class Users {
     public static function findUser(String $username, String $password) {

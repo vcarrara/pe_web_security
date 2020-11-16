@@ -27,7 +27,7 @@ Preuves de concept sur la sécurité des applications web, exploitant les risque
 1. Démarrez Apache et MySQL.
 2. Créez la base de données MySQL et son utilisateur grâce au fichier `/init_db/init.sql`.
 3. Servez le dossier `www` sur le serveur Apache (_voir étape optionnelle_).
-4. Vérifiez la conformité des informations de connexion dans `www/Database.php`.
+4. Vérifiez la conformité des informations de connexion dans `www/config/Database.php`.
 
 ### Optionnel
 
@@ -51,7 +51,7 @@ Il est possible de changer le dossier servi par Apache (htdocs sous Xampp par ex
    $ docker-compose down
    ```
 
-2. Vérifiez la conformité des informations de connexion dans `www/Database.php`.
+2. Vérifiez la conformité des informations de connexion dans `www/config/Database.php`.
 
 <hr />
 Réalisé par [@vcarrara](https://github.com/vcarrara) & [@aclairet](https://github.com/aclairet), 2020.

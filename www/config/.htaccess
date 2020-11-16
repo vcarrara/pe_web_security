@@ -1,0 +1,3 @@
+# Le contenu de ce dossier n'est pas directement servi mais reste utilisable par d'autres scripts PHP
+Order allow,deny
+Deny from all
