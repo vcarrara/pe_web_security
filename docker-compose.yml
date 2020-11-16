@@ -1,0 +1,52 @@
+version: "2"
+
+services:
+  httpd:
+    # Lecture du Dockerfile présent dans le même répertoire
+    build: .
+    # Définition du nom du container
+    container_name: pe_web_security_httpd-php
+    # Binding du port 80 de la machine sur le port 80 du container
+    ports:
+      - "80:80"
+    # Partage du dossier www vers /var/www/html/
+    volumes:
+      - ./www/:/var/www/html/
+    # Dépendance sur le container db
+    depends_on:
+      - db
+  db:
+    # Utilisation de l'image mysql
+    image: mysql
+    # Définition du nom du container
+    container_name: pe_web_security_mysql
+    volumes:
+      # Utilisation du volume pe_web_security_data_mysql pour assurer la persistance des données de la base
+      - pe_web_security_data_mysql:/var/lib/mysql
+      # Seed utilisée pour créer la base de données et y insérer les données lors de la prmière utilisation
+      - ./init_db:/docker-entrypoint-initdb.d
+    # Binding du port 3306 de la machine sur le port 3306 du container  
+    ports:
+      - "3306:3306"
+    environment:
+      # Mot de passe root de la bd, à changer obligatoirement
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: ""
+  phpmyadmin:
+    # Utilisation de l'image phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    # Définition du nom du container
+    container_name: pe_web_security_phpmyadmin
+    # Binding du port 8888 de la machine sur le port 80 du container
+    ports:
+      - "8888:80"
+    # Dépendance sur le container db
+    depends_on:
+      - db    
+    environment:
+      # Définition du HOST sur le container db
+      PMA_HOST: db
+
+volumes:
+  # Création d'un volume pour la persistance de la base de données
+  pe_web_security_data_mysql:

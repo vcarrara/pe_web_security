@@ -1,5 +1,5 @@
 <?php
-require_once './models/Database.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Database.php';
 
 class Messages {
     public static function get() {

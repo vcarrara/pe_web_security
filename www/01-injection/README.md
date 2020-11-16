@@ -4,17 +4,17 @@
 
 Pour cette preuve de concept, deux utilisateurs seront mobilisés :
 
-- **john_doe**, dont le mot de passe est **CroSS-SitE\$John2020**
-- **super_jane**, dont le mot de passe est **CroSS-SitE\$Jane2020**
+- **john_doe_injection**, dont le mot de passe est **CroSS-SitE\$John2020**
+- **super_jane_injection**, dont le mot de passe est **CroSS-SitE\$Jane2020**
 
 :bookmark_tabs: Scénario :
 
-Nous allons nous mettre dans la peau de **john_doe** qui aura le rôle de l'attaquant. Son but est de se connecter sur le compte d'un admin de son entreprise qui est super_jane.
+Nous allons nous mettre dans la peau de **john_doe_injection** qui aura le rôle de l'attaquant. Son but est de se connecter sur le compte d'un admin de son entreprise qui est super_jane_injection.
 Comme beaucoup de personne, john_doe connaît l'identifiant de l'admin qui est souvent sur le même modèle que les identifiants des compte utilisateurs lambda. C'est-à-dire soit une adresse mail (celle de l'entreprise) ou bien c'est tout simplement "admin" ou "super_admin".
 
 Pour pouvoir atteindre son objectif, john va utiliser l'**injection SQL** car il se doute que le portail d'authentification n'est pas très sécurisé.
 
-1. Connectez-vous au compte de **john_doe** pour vérifier que tout fonctionne bien.
+1. Connectez-vous au compte de **john_doe_injection** pour vérifier que tout fonctionne bien.
 2. Déconnectez-vous et essayer de vous connecter au compte administrateur de super_jane. Bien sûr sans son mot de passe il est impossible de s'y connecter.
 3. Sachant que l'instruction SQL qui permet l'authentification est du format ci-dessous, essayez d'effectuer une injection SQL. Essayez de trouver une instruction à saisir dans le champ de l'identifiant permettant de rendre le mot de passe facultatif. _Indice -> utilisez les caractère '#' ou '--' permettant d'écrire un commentaire en SQL_.
 
