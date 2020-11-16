@@ -54,4 +54,5 @@ Il est possible de changer le dossier servi par Apache (htdocs sous Xampp par ex
 2. Vérifiez la conformité des informations de connexion dans `www/config/Database.php`.
 
 <hr />
+
 Réalisé par [@vcarrara](https://github.com/vcarrara) & [@aclairet](https://github.com/aclairet), 2020.
