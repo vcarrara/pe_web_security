@@ -18,26 +18,25 @@ Preuves de concept sur la sécurité des applications web, exploitant les risque
 :wrench: La version de PHP utilisée lors de l'expertise est **7.4.10**
 
 <hr />
-<br />
 
 :loudspeaker: Il est à noter qu'Apache/PHP sous XAMPP/WAMP utilise des configurations souvent différentes qu'avec Docker.
 
 ## Fonctionnement classique
 
-1. Démarrez Apache et MySQL.
+1. Démarrez Apache & MySQL.
 2. Créez la base de données MySQL et son utilisateur grâce au fichier `/init_db/init.sql`.
-3. Servez le dossier `www` sur le serveur Apache (_voir étape optionnelle_).
-4. Vérifiez la conformité des informations de connexion dans `www/config/Database.php`.
+3. Servez le dossier `/www` sur le serveur Apache (_voir étape optionnelle_).
+4. Vérifiez la conformité des informations de connexion dans `/www/config/Database.php`.
 
 ### Optionnel
 
 Il est possible de changer le dossier servi par Apache (htdocs sous Xampp par exemple) en modifiant le fichier `httpd.conf` d'Apache.
 
-1. Trouvez le tag `DocumentRoot "C:/xampp/htdocs"` et modifier le chemin par le chemin du dossier désiré.
-2. Trouvez la ligne suivante et modifiez là en indiquant le chemin désiré `<Directory "C:/xampp/htdocs">`.
+1. Trouvez le tag `DocumentRoot "C:/xampp/htdocs"` et modifier le chemin par le chemin du dossier `www`.
+2. Trouvez la ligne suivante et modifiez là en indiquant le chemin `www` : `<Directory "C:/xampp/htdocs">`.
 3. Redémarrez le serveur Apache.
 
-## Fonctionnement avec Docker (:warning: en cours)
+## Fonctionnement avec Docker - :warning: en cours
 
 1. Démarrez les conteneurs (_la base de données devrait être automatiquement remplie lors du premier démarrage des conteneurs_).
 
@@ -51,7 +50,7 @@ Il est possible de changer le dossier servi par Apache (htdocs sous Xampp par ex
    $ docker-compose down
    ```
 
-2. Vérifiez la conformité des informations de connexion dans `www/config/Database.php`.
+2. Vérifiez la conformité des informations de connexion dans `/www/config/Database.php`.
 
 <hr />
 
