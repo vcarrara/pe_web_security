@@ -50,31 +50,83 @@ Voyons comment il est possible d'exécuter du code malveillant en exploitant l'*
 1. Rendez-vous sur la page `calculatrice.php`. Le principe est assez simple, l'utilisateur entre une expression mathématique dans un champ prévu à cet effet. Lorsque le formulaire est envoyé, l'expression, reçue sous la forme d'une chaîne de caractères, est exécutée en tant que code PHP et est affectée à une variable. Examinez le contenu du fichier afin d'en comprendre le fonctionnement.
 2. Vérifiez le bon fonctionnement de la page en calculant l'expression `3*2 - 5`.
 3. Quelle expression PHP permet de calculer la puissance d'un nombre ? Modifier le calcul précedent afin d'ajouter 2 à la puissance 5 en utilisant la fonction trouvée. Le calcul devrait ressembler à ceci : `3*2 - 5 + <expression PHP>`.
+
+   ```php
+   # Indice
+   3*2 - 5 + pow(2, 5)
+
+   # Ou depuis PHP 5.6
+   3*2 - 5 + 2**5
+   ```
+
 4. Vous l'aurez compris, il est possible d'exploiter ce fonctionnement afin d'exécuter du code malveillant sur le serveur.
-5. Validez le formulaire avec comme valeur de calcul : `1+1; echo "<h1>Ce site n'est pas sécurisé</hi>"`. Que se passe t'il ?
+5. Validez le formulaire avec comme valeur de calcul :
+
+   ```php
+   1; echo "<h1>Ce site n'est pas sécurisé</hi>"
+   ```
+
+   Que se passe t'il ?
+
 6. L'expression précédente exploite la faille que nous présentons mais l'attaque n'est pas comprométente pour le serveur. Essayez maintenant d'exécuter `phpinfo()` après un calcul banal. Quelles informations pouvez-vous voir ?
+
+   ```php
+   1; phpinfo()
+   ```
+
 7. :collision: phpinfo() apporte de nombreuses informations sur le serveur PHP, qui pourraient être utilisées à des fins malveillantes si elles tombaient entre de mauvaises mains. C'est pourquoi la fonction `phpinfo()` ne doit jamais être utilisé sur un site publié en production ! Bien qu'elle permette d'apporter des informations pour des attaques futures, elle n'attaque pas le serveur directement. Voyons comment aller plus loin en attaquant le serveur directement.
 8. Essayez de modifier le fichier `calculatrice.php` en exploitant l'injection `eval`. Faites que l'instruction `echo "Le fichier a été modifié";` soit ajoutée à la fin du fichier `calculatrice.php`.
 
-```php
-# Indice
-file_put_contents('<nom_du_fichier>', '<contenu>', FILE_APPEND | LOCK_EX);
-```
+   ```php
+   1; file_put_contents('calculatrice.php', 'echo "Le fichier a été modifié";', FILE_APPEND | LOCK_EX);
+   ```
+
+   Le fichier `calculatrice.php` devrait avoir été modifié.
 
 9. Vous l'aurez compris, il est possible de modifier n'importe quel fichier sur le serveur afin d'en modifier le contenu. Toute fonction PHP peut ainsi être exécutée de manière non contrôlée (ajout/supression de fichiers/répertoires, exécution de commandes SHELL, accès au code source de l'application PHP, ...).
-10. Affichez le code source de la page `connexion.php` en utilisant le formulaire de la calculatrice. _Indice : Affichez le contenu dans une balise `<xmp>`, cela permettra de ne pas inteprêter le contenu HTML du fichier_.
+10. Affichez le code source de la page `connexion.php` en utilisant le formulaire de la calculatrice grâce à la fonction PHP `show_source`.
 
-```php
-# Indice
-echo '<xmp>' . file_get_contents('<nom_du_fichier>') . '</xmp>';
-```
+    ```php
+    1; show_source('connexion.php')
+    ```
 
 11. :warning: (peut être risqué) Tuez le processus Apache. La fonction [shell_exec](https://www.php.net/manual/fr/function.shell-exec.php) permet d'exécuter une commande via le Shell et retourne le résultat sous forme de chaîne de caractères.
 
 - Avec Windows :
 
-  Grâce à la fonction présentée ci-dessus et au formulaire de la calculatrice, listez les processus qui écoutent le port 80 sur le serveur grâce à la commande `netstat -ano | findstr :<numéro_de_port>`. Vous devriez trouver l'identifiant (**PID**) du processus ayant l'état **LISTENING** sur le port 80. Maintenant, vous devriez pouvoir tuer le processus (httpd.exe) qui correspond au serveur Apache / PHP et ainsi rendre le site **totalement inutilisable** grâce à la commande `taskkill /PID <identifiant_de_processus>`.
+  Grâce à la fonction présentée ci-dessus et au formulaire de la calculatrice, listez les processus qui écoutent le port du serveur Apache (généralement 80) grâce à la commande `netstat -ano | findstr :<numéro_de_port>`. Vous devriez trouver l'identifiant (**PID**) du processus ayant l'état **LISTENING** sur le port demandé.
+
+  ```php
+  # Indice avec le port 80
+  1; echo '<pre>' . shell_exec('netstat -ano | findstr :80') . '</pre>'
+  ```
+
+  Maintenant, vous devriez pouvoir tuer le processus (httpd.exe) qui correspond au serveur Apache / PHP et ainsi rendre le site **totalement inutilisable** grâce à la commande `taskkill /PID identifiant_de_processus`.
+
+  ```php
+  1; shell_exec('taskkill /PID identifiant_de_processus')
+  ```
 
 :tada: Félicitations ! Vous venez d'effectuer une attaque **DDoS** sur le serveur.
 
 Vous l'aurez compris, l'**injection eval** est extrêmement dangereuse et est l'entrée pour pléthores d'attaques informatiques. Les points qui ont été présentés ne sont qu'une infime partie des possibilités offertes par cette faille.
+
+:lock: Il est possible de prévenir l'**injection eval** en restreignant l'usage de certaines fonctions PHP. Il est ainsi possible de désactiver certaines fonctions de PHP manuellement dans un but de sécurisation de l'application web. Pour se faire, ouvrez le fichier `php.ini` disponible dans le dossier de configuration de PHP. Modifiez la ligne suivante et ajoutez les fonctions à restreindre :
+
+```
+# Exemple de restriction des fonctions show_source et shell_exec
+disable_functions=show_source,shell_exec
+```
+
+Voici une liste non-exhaustive de fonctions PHP "à risque" si elles sont manipulées par de mauvaises personnes :
+
+- **exec** (exécute un programme externe)
+- **passthru** (exécute un programme externe et affiche le résultat brut)
+- **shell_exec** (exécute une commande via le Shell et retourne le résultat sous forme de chaîne)
+- **system** (exécute un programme externe et affiche le résultat),
+- **proc_open** (exécute une commande et ouvre les pointeurs de fichiers pour les entrées / sorties)
+- **popen** (crée un processus de pointeur de fichier)
+- **curl_exec** (exécute une session cURL)
+- **curl_multi_exec** (exécute les sous-requêtes de la session cURL)
+- **parse_ini_file** (analyse un fichier de configuration)
+- **show_source**/**highlight_file** (colorisation syntaxique d'un fichier)

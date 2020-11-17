@@ -18,4 +18,3 @@ if (isset($_SESSION['username'])) {
 }
 
 require './fragments/footer.php';
-?>
