@@ -30,10 +30,10 @@ Preuves de concept sur la sécurité des applications web, exploitant les risque
 
 ### Optionnel
 
-Il est possible de changer le dossier servi par Apache (htdocs sous Xampp par exemple) en modifiant le fichier `httpd.conf` d'Apache.
+Il est possible de changer le dossier servi par Apache en modifiant le fichier `httpd.conf` d'Apache. _L'exemple est pris avec le dossier htdocs sous Xampp mais est valable partout._
 
 1. Trouvez le tag `DocumentRoot "C:/xampp/htdocs"` et modifier le chemin par le chemin du dossier `www`.
-2. Trouvez la ligne suivante et modifiez là en indiquant le chemin `www` : `<Directory "C:/xampp/htdocs">`.
+2. Trouvez la ligne suivante et modifiez là en indiquant le chemin du dossier `www` sur la machine : `<Directory "C:/xampp/htdocs">`.
 3. Redémarrez le serveur Apache.
 
 ## Fonctionnement avec Docker - :warning: en cours
