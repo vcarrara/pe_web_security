@@ -31,6 +31,12 @@ Bonus : Sur le même schéma, essayer de supprimer l'utilisateur bob de la base 
 
 Bien sûr cet exemple est très basique mais permet de comprendre ce genre de faille et les potentiels dégâts qu'elle peut engendrer.
 
+:bookmark_tabs: Il est possible de prévenir l'**injection SQL** de plusieurs fâçons :
+
+- Utiliser un [Web Application Firewall](https://github.com/vcarrara/pe_web_security/tree/main/www/06-security-misconfiguration).
+- Restreindre les droits de l'utilisateur de base de données, en effet, il n'est pas nécessaire que cet utilisateur puiise modifier la structure de la base de données.
+- Utiliser des requêtes préparées.
+
 ## Injection Eval
 
 `eval` est une fonction PHP permettant d'exécuter une chaîne de caractères en tant que code PHP. Par exemple, les deux codes présentés ci-dessous font la même chose.
@@ -109,13 +115,13 @@ Voyons comment il est possible d'exécuter du code malveillant en exploitant l'*
 
 - Avec Linux
 
-    ```php
-    1; echo shell_exec('/etc/init.d/apache2 stop')
-    # ou
-    1; echo shell_exec('sudo /etc/init.d/apache2 stop')
-    # ou
-    1; echo shell_exec('sudo service apache2 stop')
-    ```
+  ```php
+  1; echo shell_exec('/etc/init.d/apache2 stop')
+  # ou
+  1; echo shell_exec('sudo /etc/init.d/apache2 stop')
+  # ou
+  1; echo shell_exec('sudo service apache2 stop')
+  ```
 
 :tada: Félicitations ! Vous venez d'effectuer une attaque **DoS** sur le serveur.
 
